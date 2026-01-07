@@ -28,19 +28,35 @@
         <input type="checkbox" name = "guardrails" value = "bias" data-name = "Bias Check" onchange="updateSelected()"> Bias Check <br><span>Validates that the text is free from biases related to age, gender, sex, ethnicity, religion, etc.</span>
     </div>
 
-    <div class="option">
-        <input type="checkbox" name="guardrails" value="competitor" data-name="Competitor Check" onchange="updateSelected(); toggleInput(this)">Competitor Check<br>
-        <input type="text" class="text-input" name="input_competitor" placeholder="Enter competitor names:" style="display:none;">
+    <div class="option competitor-option">
+    <input type="checkbox" name="guardrails" value="competitor" data-name="Competitor Check"
+            onchange="updateSelected(); toggleCompetitor(this)">
+    Competitor Check<br>
+    <span>Flags mentions of competitors and fixes responses by filtering out competitor names.</span>
+
+    <div class="sublist competitor-sublist" style="display:none;">
+        {% for c in competitors %}
+        <label>
+            <input type="checkbox" name="sub_competitor" value="{{ c }}" onchange="updateSelected()"> {{ c }}
+        </label><br>
+        {% endfor %}
     </div>
+    <input type="text" class="text-input competitor-input"
+            name="input_competitor" placeholder="Other competitors:" style="display:none;">
+    </div>
+
+
 
     <div class="option">
         <input type="checkbox" name="guardrails" value="cucumberexp" data-name="Cucumber Expression Match" onchange="updateSelected(); toggleInput(this)">Cucumber Expression Match<br>
+        <span>Validates that the input string matches a specified cucumber expression.</span>
         <input type="text" class="text-input" name="input_cucumberexp" placeholder="Enter cucumber expression:" style="display:none;">
     </div>
 
 
     <div class="option">
         <input type="checkbox" name="guardrails" value="detectpii" data-name="Detect PII" onchange="updateSelected(); togglePII(this)"> Detect PII <br>
+        <span>Detects personally identifiable information (PII) in text.</span>
     <div class="sublist" id="piiSublist">
     <label><input type="checkbox" name="sub_detectpii" value="email" onchange="updateSelected()"> Email</label><br>
     <label><input type="checkbox" name="sub_detectpii" value="phone" onchange="updateSelected()"> Phone</label><br>
@@ -113,6 +129,29 @@ function toggleInput(checkbox) {
     input.style.display = checkbox.checked ? "block" : "none";
     if (!checkbox.checked) input.value = "";
 }
+
+function toggleCompetitor(checkbox) {
+    const container = checkbox.closest('.competitor-option');
+    if (!container) return;
+
+    const sublist = container.querySelector('.competitor-sublist');
+    const input = container.querySelector('.competitor-input');
+
+    if (checkbox.checked) {
+        if (sublist) sublist.style.display = 'block';
+        if (input) input.style.display = 'block';
+    } else {
+        if (sublist) {
+            sublist.style.display = 'none';
+            sublist.querySelectorAll('input').forEach(cb => cb.checked = false);
+        }
+        if (input) {
+            input.style.display = 'none';
+            input.value = '';
+        }
+    }
+}
+
 
 
 </script>

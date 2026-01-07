@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-detectpii[
-email,
-phone
-]
-=======
-competitor
->>>>>>> c21b0bb90752090631cce04a680c9d834746e49e
+bannedwords,
+competitor,
+detectpii

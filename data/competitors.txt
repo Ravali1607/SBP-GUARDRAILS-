@@ -1,5 +1,3 @@
 google
 microsoft
-amazon
-openai
-meta
+SBP
