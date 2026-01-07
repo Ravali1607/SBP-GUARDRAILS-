@@ -15,13 +15,13 @@ class ProfanityValidator:
 
         if result.validation_passed:
             return {
-                "status": "success",
+                # "status": "success",
                 "message": "No profanity detected",
                 "passed": True
             }
 
         return {
-            "status": "success",
+            # "status": "success",
             "message": "Profanity detected",
             "passed": False
         }

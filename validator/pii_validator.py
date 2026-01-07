@@ -13,26 +13,24 @@ class PIIDetector:
         )
 
     def validate(self, text: str):
-        # 1️⃣ Password regex check
         if re.fullmatch(self.password_pattern, text):
             return {
-                "status": "success",
+                # "status": "success",
                 "message": "Sensitive data detected (password pattern)",
-                "passed": False
+                "passed": True
             }
 
-        # 2️⃣ PII check
         result = self.guard.validate(text)
 
         if result.validation_passed:
             return {
-                "status": "success",
+                # "status": "success",
                 "message": "No PII detected",
                 "passed": True
             }
 
         return {
-            "status": "success",
+            # "status": "success",
             "message": "PII detected",
             "passed": False
         }

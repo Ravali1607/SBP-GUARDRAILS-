@@ -1,1 +1,1 @@
-bias
+bannedwords,bias,detectpii

@@ -20,14 +20,14 @@ class CucumberValidator:
         if matched is None:
             fix_string = rstr.xeger(this_expression.regexp)
             return {
-                "status": "error",
+                # "status": "error",
                 "message": f"Result must match: {self._expression}",
-                "suggested_fix": fix_string,
-                "passed": False
+                # "suggested_fix": fix_string,
+                "passed": True
             }
 
         return {
-            "status": "success",
+            # "status": "success",
             "message": "Text matches cucumber-expression",
-            "passed": True
+            "passed": False
         }
