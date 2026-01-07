@@ -17,6 +17,6 @@ class SecretValidator:
             secrets.scan_file(filename)
 
         if secrets.json():
-            return {"status": "fail", "type": "secret_detected"}
+            return {"passed": False, "message": "secret_detected"}
 
-        return {"status": "pass", "type": "no_secret"}
+        return {"passed": True, "message": "no_secret"}

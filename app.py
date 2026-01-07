@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+<<<<<<< HEAD
 import json
 import os
 from datetime import datetime
@@ -78,3 +79,34 @@ def validate_text(request: RequestModel):
 
     # ---- ONLY TRUE / FALSE RESPONSE ----
     return overall_pass
+=======
+from executor import execute_validators
+
+app=FastAPI()
+
+
+# class RequestModel(BaseModel):
+#     text:str
+#     validator:str
+    
+# @app.post("/validate")
+# def validate_text(request: RequestModel):
+
+#     validator = validators.get(request.validator)
+
+#     if not validator:
+#         return {
+#             "status": "error",
+#             "message": "Validator not supported"
+#         }
+
+#     return validator.validate(request.text)
+
+class TextRequest(BaseModel):
+    text: str
+
+
+@app.post("/validate")
+def validate_text(request: TextRequest):
+    return execute_validators(request.text)
+>>>>>>> 3fb9b48c6956bebf2e00881cfffc7a4f784cb12a

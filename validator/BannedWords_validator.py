@@ -42,23 +42,45 @@
 
 from rapidfuzz import process, fuzz
 import re
+import os
 
 class BannedWordsValidator:
-    def __init__(self, keywords=None, sensitivity=85):
-        self.keywords = keywords or [
-            "cocaine", "heroin", "meth",
-            "ak-47", "ied", "silencer",
-            "suicide", "bomb", "banana"
-        ]
+    def __init__(self, keywords=None, sensitivity=80 ,words_file="data/BannedWordsList.txt"):
+        # self.keywords = keywords or [
+        #     "cocaine", "heroin", "meth",
+        #     "ak-47", "ied", "silencer",
+        #     "suicide", "bomb", "banana"
+        # ]
 
-        self.keywords = [k.lower() for k in self.keywords]
+        # self.keywords = [k.lower() for k in self.keywords]
+        # self.sensitivity = sensitivity
         self.sensitivity = sensitivity
+
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.words_path = os.path.join(base_dir, words_file)
+
+        self.keywords = self._load_banned_words()
+        
+    def _load_banned_words(self):
+        if not os.path.exists(self.words_path):
+            return []
+
+        with open(self.words_path, "r", encoding="utf-8") as f:
+            return [
+                line.strip().lower()
+                for line in f
+                if line.strip() and not line.startswith("#")
+            ]
 
     def validate(self, text: str):
         if not text or not isinstance(text, str):
             return {
-                "status": "success",
                 "message": "Invalid input",
+                "passed": True
+            }
+        if not self.keywords:
+            return {
+                "message": "No banned words configured",
                 "passed": True
             }
 
@@ -68,14 +90,15 @@ class BannedWordsValidator:
             match = process.extractOne(
                 query=word,
                 choices=self.keywords,
-                scorer=fuzz.WRatio,
+                # scorer=fuzz.WRatio,
+                scorer=fuzz.token_set_ratio,
                 score_cutoff=self.sensitivity
             )
 
             if match:
                 term, score, _ = match
                 return {
-                    "status": "success",
+                    
                     "message": "Banned word detected",
                     "passed": False,
                     "details": {
@@ -86,7 +109,7 @@ class BannedWordsValidator:
                 }
 
         return {
-            "status": "success",
+            
             "message": "No banned words detected",
             "passed": True
         }

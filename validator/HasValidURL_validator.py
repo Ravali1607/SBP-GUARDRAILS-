@@ -38,11 +38,13 @@ class URLValidator:
 
         if self.URL_REGEX.search(text):
             return {
-                "status": "pass",
-                "type": "valid_url"
+                
+                "message": "valid_url",
+                "passed": False
             }
 
         return {
-            "status": "fail",
-            "type": "invalid_url"
+            
+            "message": "invalid_url",
+            "passed": True
         }
