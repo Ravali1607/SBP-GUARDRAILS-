@@ -88,7 +88,6 @@ class PIIDetector:
             entity = self.name_map.get(item.lower())
             if entity:
                 exclude_entities.append(entity)
-        
         # Start with all entities, remove excluded ones
         entities_to_check = []
         for entity in self.all_entities:
