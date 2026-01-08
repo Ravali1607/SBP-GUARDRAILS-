@@ -5,7 +5,7 @@ from registry import VALIDATOR_REGISTRY
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "data", "selected_guardrails.txt")
 
-
+SELECTED_VALIDATORS = []
 def load_selected_validators():
     if not os.path.exists(DATA_FILE):
         return []
@@ -18,10 +18,16 @@ def load_selected_validators():
 
     return [v.strip().lower() for v in content.split(",")]
 
+# def refresh_selected_validators():
+#     global SELECTED_VALIDATORS
+#     SELECTED_VALIDATORS = load_selected_validators()
+#     print(" FastAPI loaded validators:", SELECTED_VALIDATORS)
+
 
 def execute_validators(text: str):
     selected_validators = load_selected_validators()
-
+    # print("hiiiiiiiiiiiiiiii")
+    # print(SELECTED_VALIDATORS)
     results = {}
     overall_passed = True
 

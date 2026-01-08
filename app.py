@@ -22,6 +22,10 @@ app=FastAPI()
 
 #     return validator.validate(request.text)
 
+# @app.on_event("startup")
+# def load_guardrails():
+#     refresh_selected_validators()
+
 class TextRequest(BaseModel):
     text: str
 

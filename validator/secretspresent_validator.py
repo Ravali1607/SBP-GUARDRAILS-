@@ -1,6 +1,6 @@
 import tempfile
-from detect_secrets import SecretsCollection
-from detect_secrets.settings import default_settings
+from detect_secrets import SecretsCollection # type: ignore
+from detect_secrets.settings import default_settings # type: ignore
 
 class SecretValidator:
     def validate(self, text: str) -> dict:

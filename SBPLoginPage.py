@@ -48,6 +48,7 @@ def submit_guardrails():
 
     with open(FILE_PATH, 'w') as f:
         f.write(output)
+        
 
     return redirect(url_for('admin_guardrails', name='admin'))
 
