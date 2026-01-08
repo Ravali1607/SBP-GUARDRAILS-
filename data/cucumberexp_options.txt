@@ -1,0 +1,8 @@
+I buy {positive_number} apples
+I sell {negative_number} apples
+I buy {positive_number} bananas
+I bought {positive_number} apples
+I bought apples {positive_number}
+I bought
+I find all
+Mokash

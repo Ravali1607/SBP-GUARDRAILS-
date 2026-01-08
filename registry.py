@@ -9,10 +9,26 @@ from validator.competitor_validator import CompetitorValidator
 from cucumber_expressions.parameter_type import ParameterType
 
 
-positive_number = ParameterType("positive_number", regexp=r"\d+", type=int)
+# positive_number = ParameterType("positive_number", regexp=r"\d+", type=int)
+# cucumber_validator = CucumberValidator(
+#     "I buy {positive_number} apple(s)/banana(s)/orange(s)",
+#     parameter_types=[positive_number]
+# )
+positive_number = ParameterType(
+    "positive_number",
+    regexp=r"\d+",
+    type=int
+)
+negative_number = ParameterType(
+    "negative_number",
+    regexp=r"-\d+",
+    type=int
+)
+
+
 cucumber_validator = CucumberValidator(
-    "I buy {positive_number} apple(s)/banana(s)/orange(s)",
-    parameter_types=[positive_number]
+    expressions=[],   # ← executor will inject options
+    parameter_types=[positive_number,negative_number]
 )
 
 VALIDATOR_REGISTRY={

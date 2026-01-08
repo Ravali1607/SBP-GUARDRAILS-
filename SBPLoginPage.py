@@ -80,7 +80,7 @@ def submit_guardrails():
         f.write(",\n".join(structured))
 
     # Write Detect PII sub-options
-    detect_pii_file = os.path.join(DATA_DIR, 'detectPII.txt')
+    detect_pii_file = os.path.join(DATA_DIR, 'detectPii_options.txt')
     with open(detect_pii_file, 'w') as f:
         for item in detect_pii_subs:
             f.write(item + "\n")

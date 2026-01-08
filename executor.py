@@ -125,6 +125,9 @@ def execute_validators(text: str):
             # options will be [] (empty) if no sub-options selected
             # or ['email', 'phone'] if sub-options selected
             result = validator.check_except(options, text)
+        elif name=="cucumberexp":
+            validator._expressions = options  # inject expressions dynamically
+            result = validator.validate(text)
         else:
             # All other validators
             result = validator.validate(text)
