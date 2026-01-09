@@ -86,7 +86,7 @@ def submit_guardrails():
                 return redirect(url_for('admin_guardrails', name='admin', cucumber_error=1))
 
            # Write Cucumber in txt file
-            with open(os.path.join(DATA_DIR, 'CucumberExpression.txt'), 'w') as f:
+            with open(os.path.join(DATA_DIR, 'cucumberexp_options.txt'), 'w') as f:
                     f.write(txt.strip())
                     structured.append(val)
 
@@ -107,7 +107,7 @@ def submit_guardrails():
             f.write(item + "\n")
 
     # Write code finder sub-list
-    with open(os.path.join(DATA_DIR, 'CodeFinder.txt'), 'w') as f:
+    with open(os.path.join(DATA_DIR, 'codefinder_options.txt'), 'w') as f:
         for x in codefinder_subs:
             f.write(x + "\n")
 

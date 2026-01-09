@@ -128,6 +128,9 @@ def execute_validators(text: str):
         elif name=="cucumberexp":
             validator._expressions = options  # inject expressions dynamically
             result = validator.validate(text)
+        elif name =="codefinder":
+            result = validator.validate(text, options)
+            
         else:
             # All other validators
             result = validator.validate(text)

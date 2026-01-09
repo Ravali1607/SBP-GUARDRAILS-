@@ -1,0 +1,25 @@
+[PYTHON]
+(^|\n)\s*def\s+\w+\s*\(.*\)\s*:              # function definition
+(?<!\w)def\b\s*[A-Za-z_][A-Za-z0-9_]*?\s*\(? # def keyword
+(^|\n)\s*class\s+\w+\s*:                     # class definition
+\bimport\s+\w+                               # import
+\bfrom\s+\w+\s+import\s+\w+                  # from import
+\bprint\s*\(.*?\)                            # print()
+\bself\b                                    # self
+===END===
+
+[JAVA]
+public\s+static\s+void\s+main\s*\(           # main method
+System\.out\.println\s*\(                     # print
+\b(class|interface)\s+\w+                      # class/interface
+\bnew\s+\w+\s*\(                              # object creation
+\b(int|double|float|String|boolean)\s+\w+\s*[=;] # typed vars
+===END===
+
+[CPP]
+#include\s*<[^>]+>                            # include
+\bstd::\w+                                   # std::
+\bcout\s*<<                                  # cout
+\bint\s+main\s*\(                            # main
+template\s*<.*?>                             # template
+===END===

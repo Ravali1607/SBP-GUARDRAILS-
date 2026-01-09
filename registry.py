@@ -6,6 +6,7 @@ from validator.profanity_validator import ProfanityValidator
 from validator.pii_validator import PIIDetector
 from validator.BannedWords_validator import BannedWordsValidator
 from validator.competitor_validator import CompetitorValidator
+from validator.codefinder_validator import SyntaxValidator
 from cucumber_expressions.parameter_type import ParameterType
 
 
@@ -39,5 +40,6 @@ VALIDATOR_REGISTRY={
     "profanity":ProfanityValidator(),
     "detectpii":PIIDetector(),
     "bannedwords":BannedWordsValidator(),
-    "competitor":CompetitorValidator()
+    "competitor":CompetitorValidator(),
+    "codefinder":SyntaxValidator()
 }
