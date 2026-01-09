@@ -120,12 +120,12 @@ def execute_validators(text: str):
             overall_passed = False
             continue
 
-        # SPECIAL: For PII validator
-        if name == "detectpii" and hasattr(validator, 'check_except'):
-            # options will be [] (empty) if no sub-options selected
-            # or ['email', 'phone'] if sub-options selected
-            result = validator.check_except(options, text)
-        elif name=="cucumberexp":
+        # # SPECIAL: For PII validator
+        # if name == "detectpii" and hasattr(validator, 'check_except'):
+        #     # options will be [] (empty) if no sub-options selected
+        #     # or ['email', 'phone'] if sub-options selected
+        #     result = validator.check_except(options, text)
+        if name=="cucumberexp":
             validator._expressions = options  # inject expressions dynamically
             result = validator.validate(text)
         elif name =="codefinder":
